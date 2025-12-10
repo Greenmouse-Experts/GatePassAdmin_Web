@@ -113,6 +113,9 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                     className:
                       'bg-[#165757]/10 text-[#165757] hover:bg-[#165757]/15 font-semibold',
                   }}
+                  activeOptions={{
+                    exact: item.href === '/dashboard',
+                  }}
                 >
                   <item.icon className="w-5 h-5 flex-shrink-0" />
                   <span className="flex-1">{item.label}</span>
