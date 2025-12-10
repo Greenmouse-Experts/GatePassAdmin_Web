@@ -1,29 +1,32 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { DashboardLayout } from '../../components/DashboardLayout'
-import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/Card'
-import { Button } from '../../components/ui/Button'
-import { Badge } from '../../components/ui/Badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/Tabs'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '../../components/ui/Table'
-import { Check, FileText, Plus, Tag } from 'lucide-react'
-import {
-  demoPlans,
-  demoSubscriptions,
-  demoInvoices,
-} from '../../data/demo.subscriptions'
+import { CreditCard } from 'lucide-react'
+// import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/Card'
+// import { Button } from '../../components/ui/Button'
+// import { Badge } from '../../components/ui/Badge'
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/Tabs'
+// import {
+//   Table,
+//   TableBody,
+//   TableCell,
+//   TableHead,
+//   TableHeader,
+//   TableRow,
+// } from '../../components/ui/Table'
+// import { Check, FileText, Plus, Tag } from 'lucide-react'
+// import {
+//   demoPlans,
+//   demoSubscriptions,
+//   demoInvoices,
+// } from '../../data/demo.subscriptions'
 
 export const Route = createFileRoute('/dashboard/subscriptions')({
   component: SubscriptionsPage,
 })
 
 function SubscriptionsPage() {
+  /* 
+  // Uncomment this section to restore full functionality
   const getInvoiceStatusColor = (
     status: 'paid' | 'pending' | 'overdue' | 'cancelled'
   ) => {
@@ -46,11 +49,35 @@ function SubscriptionsPage() {
   const pendingRevenue = demoInvoices
     .filter((inv) => inv.status === 'pending')
     .reduce((sum, inv) => sum + inv.amount, 0)
+  */
 
   return (
     <DashboardLayout>
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="text-center space-y-4">
+          <div className="flex justify-center">
+            <div className="p-6 bg-[#165757]/10 rounded-full">
+              <CreditCard className="w-16 h-16 text-[#165757]" />
+            </div>
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900">
+            Subscription & Billing
+          </h2>
+          <p className="text-gray-600 max-w-md">
+            This page is coming soon. We're working on bringing you comprehensive
+            subscription management and billing features.
+          </p>
+        </div>
+      </div>
+    </DashboardLayout>
+  )
+
+  /* 
+  // Uncomment this return statement to restore full functionality
+  return (
+    <DashboardLayout>
       <div className="space-y-6">
-        {/* Header */}
+        {/* Header *\/}
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">
@@ -72,13 +99,13 @@ function SubscriptionsPage() {
           </div>
         </div>
 
-        {/* Stats */}
+        {/* Stats *\/}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <Card>
             <CardContent className="p-6">
               <div className="text-sm text-gray-600">Total Revenue</div>
               <div className="text-3xl font-bold text-green-600 mt-2">
-                ${totalRevenue.toLocaleString()}
+                ₦{totalRevenue.toLocaleString()}
               </div>
               <div className="text-xs text-gray-500 mt-1">All time</div>
             </CardContent>
@@ -87,7 +114,7 @@ function SubscriptionsPage() {
             <CardContent className="p-6">
               <div className="text-sm text-gray-600">Pending Payments</div>
               <div className="text-3xl font-bold text-amber-600 mt-2">
-                ${pendingRevenue.toLocaleString()}
+                ₦{pendingRevenue.toLocaleString()}
               </div>
               <div className="text-xs text-gray-500 mt-1">
                 {demoInvoices.filter((i) => i.status === 'pending').length}{' '}
@@ -110,7 +137,7 @@ function SubscriptionsPage() {
             <CardContent className="p-6">
               <div className="text-sm text-gray-600">MRR</div>
               <div className="text-3xl font-bold text-[#1a8f5f] mt-2">
-                $
+                ₦
                 {demoSubscriptions
                   .filter((s) => s.status === 'active')
                   .reduce((sum, s) => sum + s.amount, 0)
@@ -123,7 +150,7 @@ function SubscriptionsPage() {
           </Card>
         </div>
 
-        {/* Tabs */}
+        {/* Tabs *\/}
         <Tabs defaultValue="plans">
           <TabsList>
             <TabsTrigger value="plans">Plans & Pricing</TabsTrigger>
@@ -131,7 +158,7 @@ function SubscriptionsPage() {
             <TabsTrigger value="invoices">Invoices</TabsTrigger>
           </TabsList>
 
-          {/* Plans Tab */}
+          {/* Plans Tab *\/}
           <TabsContent value="plans">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {demoPlans.map((plan) => (
@@ -147,7 +174,7 @@ function SubscriptionsPage() {
                     </CardTitle>
                     <div className="mt-4">
                       <span className="text-4xl font-bold text-gray-900">
-                        ${plan.price}
+                        ₦{plan.price}
                       </span>
                       <span className="text-gray-600">/month</span>
                     </div>
@@ -173,7 +200,7 @@ function SubscriptionsPage() {
             </div>
           </TabsContent>
 
-          {/* Subscriptions Tab */}
+          {/* Subscriptions Tab *\/}
           <TabsContent value="subscriptions">
             <Card>
               <CardHeader>
@@ -230,7 +257,7 @@ function SubscriptionsPage() {
                         </TableCell>
                         <TableCell>
                           <div className="font-medium">
-                            ${sub.amount.toLocaleString()}
+                            ₦{sub.amount.toLocaleString()}
                           </div>
                         </TableCell>
                         <TableCell>
@@ -259,7 +286,7 @@ function SubscriptionsPage() {
             </Card>
           </TabsContent>
 
-          {/* Invoices Tab */}
+          {/* Invoices Tab *\/}
           <TabsContent value="invoices">
             <Card>
               <CardHeader>
@@ -300,7 +327,7 @@ function SubscriptionsPage() {
                         </TableCell>
                         <TableCell>
                           <div className="font-medium">
-                            ${invoice.amount.toLocaleString()}
+                            ₦{invoice.amount.toLocaleString()}
                           </div>
                         </TableCell>
                         <TableCell>
@@ -346,4 +373,5 @@ function SubscriptionsPage() {
       </div>
     </DashboardLayout>
   )
+  */
 }

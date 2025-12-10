@@ -1,20 +1,23 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { DashboardLayout } from '../../components/DashboardLayout'
-import { Card, CardContent } from '../../components/ui/Card'
-import { Button } from '../../components/ui/Button'
-import { Input } from '../../components/ui/Input'
-import { Select } from '../../components/ui/Select'
-import { Badge } from '../../components/ui/Badge'
-import { Alert, AlertDescription, AlertTitle } from '../../components/ui/Alert'
-import { Search, AlertTriangle, CheckCircle2, Clock, XCircle } from 'lucide-react'
-import { demoSecurityAlerts } from '../../data/demo.alerts'
-import { useState } from 'react'
+import { AlertTriangle } from 'lucide-react'
+// import { Card, CardContent } from '../../components/ui/Card'
+// import { Button } from '../../components/ui/Button'
+// import { Input } from '../../components/ui/Input'
+// import { Select } from '../../components/ui/Select'
+// import { Badge } from '../../components/ui/Badge'
+// import { Alert, AlertDescription, AlertTitle } from '../../components/ui/Alert'
+// import { Search, CheckCircle2, Clock, XCircle } from 'lucide-react'
+// import { demoSecurityAlerts } from '../../data/demo.alerts'
+// import { useState } from 'react'
 
 export const Route = createFileRoute('/dashboard/alerts')({
   component: SecurityAlertsPage,
 })
 
 function SecurityAlertsPage() {
+  /*
+  // Uncomment to restore full functionality
   const [searchTerm, setSearchTerm] = useState('')
   const [severityFilter, setSeverityFilter] = useState('all')
   const [statusFilter, setStatusFilter] = useState('all')
@@ -82,11 +85,33 @@ function SecurityAlertsPage() {
       .length,
     resolved: demoSecurityAlerts.filter((a) => a.status === 'resolved').length,
   }
+  */
 
   return (
     <DashboardLayout>
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="text-center space-y-4">
+          <div className="flex justify-center">
+            <div className="p-6 bg-red-50 rounded-full">
+              <AlertTriangle className="w-16 h-16 text-red-600" />
+            </div>
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900">
+            Security Alerts
+          </h2>
+          <p className="text-gray-600 max-w-md">
+            This page is coming soon. We're working on bringing you real-time
+            security monitoring and alert management features.
+          </p>
+        </div>
+      </div>
+    </DashboardLayout>
+  )
+
+  /* Full page code below - uncomment to restore
+  return (
+    <DashboardLayout>
       <div className="space-y-6">
-        {/* Header */}
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Security Alerts</h1>
@@ -96,7 +121,6 @@ function SecurityAlertsPage() {
           </div>
         </div>
 
-        {/* Critical Alerts Banner */}
         {demoSecurityAlerts.filter(
           (a) => a.severity === 'critical' && a.status !== 'resolved'
         ).length > 0 && (
@@ -116,7 +140,6 @@ function SecurityAlertsPage() {
           </Alert>
         )}
 
-        {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <Card>
             <CardContent className="p-6">
@@ -156,7 +179,6 @@ function SecurityAlertsPage() {
           </Card>
         </div>
 
-        {/* Filters */}
         <Card>
           <CardContent className="p-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -195,7 +217,6 @@ function SecurityAlertsPage() {
           </CardContent>
         </Card>
 
-        {/* Alerts List */}
         <div className="space-y-4">
           {filteredAlerts.map((alert) => (
             <Card
@@ -208,14 +229,12 @@ function SecurityAlertsPage() {
             >
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
-                  {/* Icon */}
                   <div
                     className={`p-3 rounded-lg ${getSeverityColor(alert.severity)}`}
                   >
                     {getStatusIcon(alert.status)}
                   </div>
 
-                  {/* Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-4 mb-2">
                       <div className="flex-1">
@@ -242,7 +261,6 @@ function SecurityAlertsPage() {
                       </div>
                     </div>
 
-                    {/* Details */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 text-sm">
                       <div>
                         <div className="text-gray-500">Organisation</div>
@@ -273,7 +291,6 @@ function SecurityAlertsPage() {
                       </div>
                     </div>
 
-                    {/* Timeline */}
                     {(alert.acknowledgedAt || alert.resolvedAt) && (
                       <div className="mt-4 pt-4 border-t border-gray-200">
                         <div className="text-xs text-gray-500 space-y-2">
@@ -297,7 +314,6 @@ function SecurityAlertsPage() {
                       </div>
                     )}
 
-                    {/* Actions */}
                     <div className="flex items-center gap-3 mt-4">
                       {alert.status === 'new' && (
                         <Button size="sm">Acknowledge</Button>
@@ -335,4 +351,5 @@ function SecurityAlertsPage() {
       </div>
     </DashboardLayout>
   )
+  */
 }

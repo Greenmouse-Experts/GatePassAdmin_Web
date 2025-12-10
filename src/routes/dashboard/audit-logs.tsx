@@ -1,7 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { DashboardLayout } from '../../components/DashboardLayout'
-import { Card, CardContent } from '../../components/ui/Card'
 import { FileText } from 'lucide-react'
+
+// Full page code is backed up in audit-logs-BACKUP.tsx
 
 export const Route = createFileRoute('/dashboard/audit-logs')({
   component: AuditLogsPage,
@@ -10,20 +11,21 @@ export const Route = createFileRoute('/dashboard/audit-logs')({
 function AuditLogsPage() {
   return (
     <DashboardLayout>
-      <div className="space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Audit Logs</h1>
-          <p className="mt-1 text-gray-600">
-            Track all system actions and changes
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="text-center space-y-4">
+          <div className="flex justify-center">
+            <div className="p-6 bg-[#165757]/10 rounded-full">
+              <FileText className="w-16 h-16 text-[#165757]" />
+            </div>
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900">
+            Audit Logs
+          </h2>
+          <p className="text-gray-600 max-w-md">
+            This page is coming soon. We're working on bringing you comprehensive
+            activity tracking and audit trail features.
           </p>
         </div>
-
-        <Card>
-          <CardContent className="p-12 text-center text-gray-500">
-            <FileText className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-            <p>Audit logs page coming soon</p>
-          </CardContent>
-        </Card>
       </div>
     </DashboardLayout>
   )

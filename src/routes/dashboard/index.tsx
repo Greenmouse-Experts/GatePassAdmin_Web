@@ -66,7 +66,7 @@ function DashboardPage() {
           <StatCard
             title="Active Subscriptions"
             value={stats.activeSubscriptions}
-            description={`$${stats.monthlyRevenue.toLocaleString()}/month`}
+            description={`₦${stats.monthlyRevenue.toLocaleString()}/month`}
             icon={<CreditCard className="w-6 h-6" />}
             trend={{
               value: `${stats.revenueGrowth}%`,

@@ -198,7 +198,7 @@ function OrganisationsPage() {
                     </TableCell>
                     <TableCell>
                       <div className="font-medium">
-                        ${org.monthlyRevenue}/mo
+                        ₦{org.monthlyRevenue}/mo
                       </div>
                     </TableCell>
                     <TableCell>
@@ -301,7 +301,7 @@ function OrganisationsPage() {
                     Monthly Revenue
                   </div>
                   <div className="text-gray-900 font-semibold mt-1">
-                    ${selectedOrg.monthlyRevenue}
+                    ₦{selectedOrg.monthlyRevenue}
                   </div>
                 </div>
                 <div>
