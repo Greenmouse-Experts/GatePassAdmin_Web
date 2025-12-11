@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/Ta
 import { Plus, Send } from 'lucide-react'
 import { demoAnnouncements } from '../../data/demo.alerts'
 
-export const Route = createFileRoute('/dashboard/announcements-BACKUP')({
+export const Route = createFileRoute('/dashboard/announcements')({
   component: AnnouncementsPage,
 })
 

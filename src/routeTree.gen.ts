@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as DashboardUsersRouteImport } from './routes/dashboard/users'
@@ -26,6 +27,11 @@ import { Route as DashboardAnnouncementsBACKUPRouteImport } from './routes/dashb
 import { Route as DashboardAnnouncementsRouteImport } from './routes/dashboard/announcements'
 import { Route as DashboardAlertsRouteImport } from './routes/dashboard/alerts'
 
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -111,6 +117,7 @@ const DashboardAlertsRoute = DashboardAlertsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
   '/dashboard/alerts': typeof DashboardAlertsRoute
   '/dashboard/announcements': typeof DashboardAnnouncementsRoute
   '/dashboard/announcements-BACKUP': typeof DashboardAnnouncementsBACKUPRoute
@@ -129,6 +136,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
   '/dashboard/alerts': typeof DashboardAlertsRoute
   '/dashboard/announcements': typeof DashboardAnnouncementsRoute
   '/dashboard/announcements-BACKUP': typeof DashboardAnnouncementsBACKUPRoute
@@ -148,6 +156,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
   '/dashboard/alerts': typeof DashboardAlertsRoute
   '/dashboard/announcements': typeof DashboardAnnouncementsRoute
   '/dashboard/announcements-BACKUP': typeof DashboardAnnouncementsBACKUPRoute
@@ -168,6 +177,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/login'
     | '/dashboard/alerts'
     | '/dashboard/announcements'
     | '/dashboard/announcements-BACKUP'
@@ -186,6 +196,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/login'
     | '/dashboard/alerts'
     | '/dashboard/announcements'
     | '/dashboard/announcements-BACKUP'
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/login'
     | '/dashboard/alerts'
     | '/dashboard/announcements'
     | '/dashboard/announcements-BACKUP'
@@ -223,6 +235,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LoginRoute: typeof LoginRoute
   DashboardAlertsRoute: typeof DashboardAlertsRoute
   DashboardAnnouncementsRoute: typeof DashboardAnnouncementsRoute
   DashboardAnnouncementsBACKUPRoute: typeof DashboardAnnouncementsBACKUPRoute
@@ -242,6 +255,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -359,6 +379,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LoginRoute: LoginRoute,
   DashboardAlertsRoute: DashboardAlertsRoute,
   DashboardAnnouncementsRoute: DashboardAnnouncementsRoute,
   DashboardAnnouncementsBACKUPRoute: DashboardAnnouncementsBACKUPRoute,
