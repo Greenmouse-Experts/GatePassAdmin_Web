@@ -22,9 +22,9 @@ function LandingPage() {
             improve resident experience.
           </p>
           <div className="flex items-center justify-center gap-4">
-            <Link to="/dashboard">
+            <Link to="/login">
               <Button size="lg">
-                Go to Dashboard
+                Sign In
                 <ArrowRight className="w-5 h-5" />
               </Button>
             </Link>
