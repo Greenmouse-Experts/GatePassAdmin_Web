@@ -133,7 +133,7 @@ export const demoSuperAdmins: User[] = [
   {
     id: 'SU1',
     name: 'Admin User',
-    email: 'admin@entxit.com',
+    email: 'greenmousedev+admin@gmail.com',
     phone: '+1 234 567 0001',
     role: 'super-admin',
     status: 'active',

@@ -157,7 +157,7 @@ function LoginPage() {
           {/* Demo Credentials */}
           <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
             <p className="text-xs font-semibold text-gray-700 mb-2">Demo Credentials:</p>
-            <p className="text-xs text-gray-600">Email: admin@entxit.com</p>
+            <p className="text-xs text-gray-600">Email: greenmousedev+admin@gmail.com</p>
             <p className="text-xs text-gray-600">Password: admin123</p>
           </div>
         </div>
