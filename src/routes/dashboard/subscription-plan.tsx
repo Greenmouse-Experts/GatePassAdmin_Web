@@ -22,7 +22,7 @@ import {
 } from '../../data/demo.subscriptions'
 import { useState } from 'react'
 
-export const Route = createFileRoute('/dashboard/subscriptions')({
+export const Route = createFileRoute('/dashboard/subscription-plan')({
   component: SubscriptionsPage,
 })
 
@@ -75,7 +75,7 @@ function SubscriptionsPage() {
     setIsEditModalOpen(true)
   }
 
-  const handleDeletePlan = (planId: number | string) => {
+  const handleDeletePlan = (planId: number) => {
     // In real app, this would call an API
     if (confirm('Are you sure you want to delete this plan?')) {
       console.log('Deleting plan:', planId)

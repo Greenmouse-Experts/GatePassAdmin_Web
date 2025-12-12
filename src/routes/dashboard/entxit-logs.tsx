@@ -6,7 +6,6 @@ import { Input } from '../../components/ui/Input'
 import { Select } from '../../components/ui/Select'
 import { Badge } from '../../components/ui/Badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/Tabs'
-import { Modal, ModalHeader, ModalBody, ModalFooter } from '../../components/ui/Modal'
 import {
   Table,
   TableBody,
@@ -24,21 +23,13 @@ import {
 } from '../../data/demo.users'
 import { useState } from 'react'
 
-export const Route = createFileRoute('/dashboard/users')({
+export const Route = createFileRoute('/dashboard/entxit-logs')({
   component: UsersPage,
 })
 
 function UsersPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [statusFilter, setStatusFilter] = useState('all')
-  const [showAddModal, setShowAddModal] = useState(false)
-  const [newUser, setNewUser] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    organisation: '',
-    role: 'resident',
-  })
 
   const filterUsers = (users: typeof demoResidents) => {
     return users.filter((user) => {
@@ -69,7 +60,7 @@ function UsersPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">EntXit Logs</h1>
+            <h1 className="text-3xl font-bold text-gray-900">User Management</h1>
             <p className="mt-1 text-gray-600">
               Manage residents, security guards, sub-admins, and super admins
             </p>
@@ -79,7 +70,7 @@ function UsersPage() {
               <Upload className="w-4 h-4" />
               Bulk Import
             </Button>
-            <Button onClick={() => setShowAddModal(true)}>
+            <Button>
               <Plus className="w-4 h-4" />
               Add User
             </Button>
@@ -512,114 +503,6 @@ function UsersPage() {
             </Card>
           </TabsContent>
         </Tabs>
-
-        {/* Add User Modal */}
-        <Modal
-          isOpen={showAddModal}
-          onClose={() => setShowAddModal(false)}
-          size="lg"
-        >
-          <ModalHeader onClose={() => setShowAddModal(false)}>
-            Add New User
-          </ModalHeader>
-          
-          <ModalBody>
-            <div className="space-y-6">
-              {/* Two column layout for better spacing */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Input
-                    label="Full Name"
-                    placeholder="Enter full name"
-                    value={newUser.name}
-                    onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
-                    required
-                  />
-                </div>
-
-                <div>
-                  <Input
-                    label="Email Address"
-                    type="email"
-                    placeholder="user@example.com"
-                    value={newUser.email}
-                    onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-                    required
-                  />
-                </div>
-
-                <div>
-                  <Input
-                    label="Phone Number"
-                    placeholder="+234 xxx xxxx xxx"
-                    value={newUser.phone}
-                    onChange={(e) => setNewUser({ ...newUser, phone: e.target.value })}
-                    required
-                  />
-                </div>
-
-                <div>
-                  <Select
-                    label="User Role"
-                    value={newUser.role}
-                    onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
-                    options={[
-                      { value: 'resident', label: 'Resident' },
-                      { value: 'guard', label: 'Security Guard' },
-                      { value: 'subadmin', label: 'Sub-Admin' },
-                      { value: 'superadmin', label: 'Super Admin' },
-                    ]}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div>
-                <Input
-                  label="Organisation"
-                  placeholder="Enter organisation name"
-                  value={newUser.organisation}
-                  onChange={(e) => setNewUser({ ...newUser, organisation: e.target.value })}
-                  required
-                />
-              </div>
-            </div>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button
-              variant="outline"
-              onClick={() => {
-                setShowAddModal(false)
-                setNewUser({
-                  name: '',
-                  email: '',
-                  phone: '',
-                  organisation: '',
-                  role: 'resident',
-                })
-              }}
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={() => {
-                // TODO: Implement add user API call
-                console.log('Adding user:', newUser)
-                setShowAddModal(false)
-                setNewUser({
-                  name: '',
-                  email: '',
-                  phone: '',
-                  organisation: '',
-                  role: 'resident',
-                })
-              }}
-            >
-              Add User
-            </Button>
-          </ModalFooter>
-        </Modal>
       </div>
     </DashboardLayout>
   )

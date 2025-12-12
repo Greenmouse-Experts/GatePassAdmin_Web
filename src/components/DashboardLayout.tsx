@@ -15,6 +15,7 @@ import {
 } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
 import { cn } from '../lib/utils'
+import { useAuth } from '../hooks/useAuth'
 
 interface DashboardLayoutProps {
   children: ReactNode
@@ -23,7 +24,7 @@ interface DashboardLayoutProps {
 const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', href: '/dashboard' },
   { icon: Building2, label: 'Organisations', href: '/dashboard/organisations' },
-  { icon: Users, label: 'Users', href: '/dashboard/users' },
+  { icon: Users, label: 'EntXit Logs', href: '/dashboard/users' },
   {
     icon: CreditCard,
     label: 'Subscription & Billing',
@@ -47,6 +48,7 @@ const menuItems = [
 
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const { logout, isLoggingOut } = useAuth()
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -125,9 +127,13 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           </ul>
 
           <div className="mt-6 pt-6 border-t border-gray-200">
-            <button className="flex items-center gap-3 w-full p-3 text-red-600 rounded-lg hover:bg-red-50 transition-colors">
+            <button 
+              onClick={() => logout()} 
+              disabled={isLoggingOut}
+              className="flex items-center gap-3 w-full p-3 text-red-600 rounded-lg hover:bg-red-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
               <LogOut className="w-5 h-5" />
-              <span>Logout</span>
+              <span>{isLoggingOut ? 'Logging out...' : 'Logout'}</span>
             </button>
           </div>
         </div>

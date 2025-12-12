@@ -1,31 +1,42 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 import { Button } from '../components/ui/Button'
 import { Input } from '../components/ui/Input'
 import { Checkbox } from '../components/ui/Checkbox'
+import { Alert } from '../components/ui/Alert'
 import { useState } from 'react'
-import { Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff, AlertCircle } from 'lucide-react'
+import { useAuth } from '../hooks/useAuth'
 
 export const Route = createFileRoute('/login')({
   component: LoginPage,
 })
 
 function LoginPage() {
-  const navigate = useNavigate()
+  const { login, isLoggingIn, loginError, resetLoginError } = useAuth()
   const [showPassword, setShowPassword] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsLoading(true)
+    resetLoginError()
     
-    // Simulate login - replace with actual API call
-    setTimeout(() => {
-      setIsLoading(false)
-      navigate({ to: '/dashboard' })
-    }, 1000)
+    login({
+      email,
+      password,
+    })
+  }
+
+  // Get error message
+  const getErrorMessage = (error: any): string => {
+    if (error?.response?.data?.message) {
+      return error.response.data.message
+    }
+    if (error?.message) {
+      return error.message
+    }
+    return 'An error occurred during login. Please try again.'
   }
 
   return (
@@ -46,36 +57,8 @@ function LoginPage() {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(22,87,87,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(22,87,87,0.03)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
       </div>
 
-      {/* Navbar - Fixed */}
-      <nav className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md border-b border-gray-200 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="flex items-center justify-center w-10 h-10 bg-[#165757] rounded-lg">
-                <span className="text-xl font-bold text-white">E</span>
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-gray-900">EntXit</h1>
-                <p className="text-xs text-gray-500">Super Admin Portal</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <a href="/" className="text-sm text-gray-600 hover:text-[#165757] transition-colors">
-                Home
-              </a>
-              <a href="#" className="text-sm text-gray-600 hover:text-[#165757] transition-colors">
-                About
-              </a>
-              <a href="#" className="text-sm text-gray-600 hover:text-[#165757] transition-colors">
-                Contact
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
-
       {/* Main Content - Centered vertically */}
-      <div className="flex items-center justify-center min-h-screen px-4 py-24 relative z-10">
+      <div className="flex items-center justify-center min-h-screen px-4 py-12 relative z-10">
         <div className="w-full max-w-md">
           {/* Logo and title outside card */}
           <div className="text-center mb-8">
@@ -104,6 +87,7 @@ function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                disabled={isLoggingIn}
               />
             </div>
 
@@ -117,11 +101,13 @@ function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  disabled={isLoggingIn}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-[38px] text-gray-400 hover:text-gray-600"
+                  disabled={isLoggingIn}
                 >
                   {showPassword ? (
                     <EyeOff className="w-5 h-5" />
@@ -138,12 +124,14 @@ function LoginPage() {
                 <Checkbox
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
+                  disabled={isLoggingIn}
                 />
                 <span className="text-sm text-gray-700">Remember me</span>
               </label>
               <button
                 type="button"
-                className="text-sm text-[#165757] hover:text-[#134645] font-medium"
+                className="text-sm text-[#165757] hover:text-[#134645] font-medium disabled:opacity-50"
+                disabled={isLoggingIn}
               >
                 Forgot Password?
               </button>
@@ -153,9 +141,16 @@ function LoginPage() {
             <Button
               type="submit"
               className="w-full"
-              disabled={isLoading}
+              disabled={isLoggingIn}
             >
-              {isLoading ? 'Signing in...' : 'Sign In'}
+              {isLoggingIn ? (
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Signing in...
+                </div>
+              ) : (
+                'Sign In'
+              )}
             </Button>
           </form>
 

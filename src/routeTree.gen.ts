@@ -16,16 +16,20 @@ import { Route as DashboardUsersRouteImport } from './routes/dashboard/users'
 import { Route as DashboardSupportBACKUPRouteImport } from './routes/dashboard/support-BACKUP'
 import { Route as DashboardSupportRouteImport } from './routes/dashboard/support'
 import { Route as DashboardSubscriptionsRouteImport } from './routes/dashboard/subscriptions'
+import { Route as DashboardSubscriptionPlanRouteImport } from './routes/dashboard/subscription-plan'
 import { Route as DashboardSettingsBACKUPRouteImport } from './routes/dashboard/settings-BACKUP'
 import { Route as DashboardSettingsRouteImport } from './routes/dashboard/settings'
 import { Route as DashboardReportsBACKUPRouteImport } from './routes/dashboard/reports-BACKUP'
 import { Route as DashboardReportsRouteImport } from './routes/dashboard/reports'
 import { Route as DashboardOrganisationsRouteImport } from './routes/dashboard/organisations'
+import { Route as DashboardEntxitLogsRouteImport } from './routes/dashboard/entxit-logs'
 import { Route as DashboardAuditLogsBACKUPRouteImport } from './routes/dashboard/audit-logs-BACKUP'
 import { Route as DashboardAuditLogsRouteImport } from './routes/dashboard/audit-logs'
 import { Route as DashboardAnnouncementsBACKUPRouteImport } from './routes/dashboard/announcements-BACKUP'
 import { Route as DashboardAnnouncementsRouteImport } from './routes/dashboard/announcements'
 import { Route as DashboardAlertsRouteImport } from './routes/dashboard/alerts'
+import { Route as DashboardOrganisationsSecurityActivitiesSecurityIdRouteImport } from './routes/dashboard/organisations/security-activities.$securityId'
+import { Route as DashboardOrganisationsHostVisitorsHostIdRouteImport } from './routes/dashboard/organisations/host-visitors.$hostId'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -62,6 +66,12 @@ const DashboardSubscriptionsRoute = DashboardSubscriptionsRouteImport.update({
   path: '/dashboard/subscriptions',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardSubscriptionPlanRoute =
+  DashboardSubscriptionPlanRouteImport.update({
+    id: '/dashboard/subscription-plan',
+    path: '/dashboard/subscription-plan',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DashboardSettingsBACKUPRoute = DashboardSettingsBACKUPRouteImport.update({
   id: '/dashboard/settings-BACKUP',
   path: '/dashboard/settings-BACKUP',
@@ -85,6 +95,11 @@ const DashboardReportsRoute = DashboardReportsRouteImport.update({
 const DashboardOrganisationsRoute = DashboardOrganisationsRouteImport.update({
   id: '/dashboard/organisations',
   path: '/dashboard/organisations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardEntxitLogsRoute = DashboardEntxitLogsRouteImport.update({
+  id: '/dashboard/entxit-logs',
+  path: '/dashboard/entxit-logs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardAuditLogsBACKUPRoute =
@@ -114,6 +129,18 @@ const DashboardAlertsRoute = DashboardAlertsRouteImport.update({
   path: '/dashboard/alerts',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardOrganisationsSecurityActivitiesSecurityIdRoute =
+  DashboardOrganisationsSecurityActivitiesSecurityIdRouteImport.update({
+    id: '/security-activities/$securityId',
+    path: '/security-activities/$securityId',
+    getParentRoute: () => DashboardOrganisationsRoute,
+  } as any)
+const DashboardOrganisationsHostVisitorsHostIdRoute =
+  DashboardOrganisationsHostVisitorsHostIdRouteImport.update({
+    id: '/host-visitors/$hostId',
+    path: '/host-visitors/$hostId',
+    getParentRoute: () => DashboardOrganisationsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -123,16 +150,20 @@ export interface FileRoutesByFullPath {
   '/dashboard/announcements-BACKUP': typeof DashboardAnnouncementsBACKUPRoute
   '/dashboard/audit-logs': typeof DashboardAuditLogsRoute
   '/dashboard/audit-logs-BACKUP': typeof DashboardAuditLogsBACKUPRoute
-  '/dashboard/organisations': typeof DashboardOrganisationsRoute
+  '/dashboard/entxit-logs': typeof DashboardEntxitLogsRoute
+  '/dashboard/organisations': typeof DashboardOrganisationsRouteWithChildren
   '/dashboard/reports': typeof DashboardReportsRoute
   '/dashboard/reports-BACKUP': typeof DashboardReportsBACKUPRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/settings-BACKUP': typeof DashboardSettingsBACKUPRoute
+  '/dashboard/subscription-plan': typeof DashboardSubscriptionPlanRoute
   '/dashboard/subscriptions': typeof DashboardSubscriptionsRoute
   '/dashboard/support': typeof DashboardSupportRoute
   '/dashboard/support-BACKUP': typeof DashboardSupportBACKUPRoute
   '/dashboard/users': typeof DashboardUsersRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/organisations/host-visitors/$hostId': typeof DashboardOrganisationsHostVisitorsHostIdRoute
+  '/dashboard/organisations/security-activities/$securityId': typeof DashboardOrganisationsSecurityActivitiesSecurityIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -142,16 +173,20 @@ export interface FileRoutesByTo {
   '/dashboard/announcements-BACKUP': typeof DashboardAnnouncementsBACKUPRoute
   '/dashboard/audit-logs': typeof DashboardAuditLogsRoute
   '/dashboard/audit-logs-BACKUP': typeof DashboardAuditLogsBACKUPRoute
-  '/dashboard/organisations': typeof DashboardOrganisationsRoute
+  '/dashboard/entxit-logs': typeof DashboardEntxitLogsRoute
+  '/dashboard/organisations': typeof DashboardOrganisationsRouteWithChildren
   '/dashboard/reports': typeof DashboardReportsRoute
   '/dashboard/reports-BACKUP': typeof DashboardReportsBACKUPRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/settings-BACKUP': typeof DashboardSettingsBACKUPRoute
+  '/dashboard/subscription-plan': typeof DashboardSubscriptionPlanRoute
   '/dashboard/subscriptions': typeof DashboardSubscriptionsRoute
   '/dashboard/support': typeof DashboardSupportRoute
   '/dashboard/support-BACKUP': typeof DashboardSupportBACKUPRoute
   '/dashboard/users': typeof DashboardUsersRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/organisations/host-visitors/$hostId': typeof DashboardOrganisationsHostVisitorsHostIdRoute
+  '/dashboard/organisations/security-activities/$securityId': typeof DashboardOrganisationsSecurityActivitiesSecurityIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -162,16 +197,20 @@ export interface FileRoutesById {
   '/dashboard/announcements-BACKUP': typeof DashboardAnnouncementsBACKUPRoute
   '/dashboard/audit-logs': typeof DashboardAuditLogsRoute
   '/dashboard/audit-logs-BACKUP': typeof DashboardAuditLogsBACKUPRoute
-  '/dashboard/organisations': typeof DashboardOrganisationsRoute
+  '/dashboard/entxit-logs': typeof DashboardEntxitLogsRoute
+  '/dashboard/organisations': typeof DashboardOrganisationsRouteWithChildren
   '/dashboard/reports': typeof DashboardReportsRoute
   '/dashboard/reports-BACKUP': typeof DashboardReportsBACKUPRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/settings-BACKUP': typeof DashboardSettingsBACKUPRoute
+  '/dashboard/subscription-plan': typeof DashboardSubscriptionPlanRoute
   '/dashboard/subscriptions': typeof DashboardSubscriptionsRoute
   '/dashboard/support': typeof DashboardSupportRoute
   '/dashboard/support-BACKUP': typeof DashboardSupportBACKUPRoute
   '/dashboard/users': typeof DashboardUsersRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/organisations/host-visitors/$hostId': typeof DashboardOrganisationsHostVisitorsHostIdRoute
+  '/dashboard/organisations/security-activities/$securityId': typeof DashboardOrganisationsSecurityActivitiesSecurityIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -183,16 +222,20 @@ export interface FileRouteTypes {
     | '/dashboard/announcements-BACKUP'
     | '/dashboard/audit-logs'
     | '/dashboard/audit-logs-BACKUP'
+    | '/dashboard/entxit-logs'
     | '/dashboard/organisations'
     | '/dashboard/reports'
     | '/dashboard/reports-BACKUP'
     | '/dashboard/settings'
     | '/dashboard/settings-BACKUP'
+    | '/dashboard/subscription-plan'
     | '/dashboard/subscriptions'
     | '/dashboard/support'
     | '/dashboard/support-BACKUP'
     | '/dashboard/users'
     | '/dashboard'
+    | '/dashboard/organisations/host-visitors/$hostId'
+    | '/dashboard/organisations/security-activities/$securityId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -202,16 +245,20 @@ export interface FileRouteTypes {
     | '/dashboard/announcements-BACKUP'
     | '/dashboard/audit-logs'
     | '/dashboard/audit-logs-BACKUP'
+    | '/dashboard/entxit-logs'
     | '/dashboard/organisations'
     | '/dashboard/reports'
     | '/dashboard/reports-BACKUP'
     | '/dashboard/settings'
     | '/dashboard/settings-BACKUP'
+    | '/dashboard/subscription-plan'
     | '/dashboard/subscriptions'
     | '/dashboard/support'
     | '/dashboard/support-BACKUP'
     | '/dashboard/users'
     | '/dashboard'
+    | '/dashboard/organisations/host-visitors/$hostId'
+    | '/dashboard/organisations/security-activities/$securityId'
   id:
     | '__root__'
     | '/'
@@ -221,16 +268,20 @@ export interface FileRouteTypes {
     | '/dashboard/announcements-BACKUP'
     | '/dashboard/audit-logs'
     | '/dashboard/audit-logs-BACKUP'
+    | '/dashboard/entxit-logs'
     | '/dashboard/organisations'
     | '/dashboard/reports'
     | '/dashboard/reports-BACKUP'
     | '/dashboard/settings'
     | '/dashboard/settings-BACKUP'
+    | '/dashboard/subscription-plan'
     | '/dashboard/subscriptions'
     | '/dashboard/support'
     | '/dashboard/support-BACKUP'
     | '/dashboard/users'
     | '/dashboard/'
+    | '/dashboard/organisations/host-visitors/$hostId'
+    | '/dashboard/organisations/security-activities/$securityId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -241,11 +292,13 @@ export interface RootRouteChildren {
   DashboardAnnouncementsBACKUPRoute: typeof DashboardAnnouncementsBACKUPRoute
   DashboardAuditLogsRoute: typeof DashboardAuditLogsRoute
   DashboardAuditLogsBACKUPRoute: typeof DashboardAuditLogsBACKUPRoute
-  DashboardOrganisationsRoute: typeof DashboardOrganisationsRoute
+  DashboardEntxitLogsRoute: typeof DashboardEntxitLogsRoute
+  DashboardOrganisationsRoute: typeof DashboardOrganisationsRouteWithChildren
   DashboardReportsRoute: typeof DashboardReportsRoute
   DashboardReportsBACKUPRoute: typeof DashboardReportsBACKUPRoute
   DashboardSettingsRoute: typeof DashboardSettingsRoute
   DashboardSettingsBACKUPRoute: typeof DashboardSettingsBACKUPRoute
+  DashboardSubscriptionPlanRoute: typeof DashboardSubscriptionPlanRoute
   DashboardSubscriptionsRoute: typeof DashboardSubscriptionsRoute
   DashboardSupportRoute: typeof DashboardSupportRoute
   DashboardSupportBACKUPRoute: typeof DashboardSupportBACKUPRoute
@@ -304,6 +357,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardSubscriptionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/subscription-plan': {
+      id: '/dashboard/subscription-plan'
+      path: '/dashboard/subscription-plan'
+      fullPath: '/dashboard/subscription-plan'
+      preLoaderRoute: typeof DashboardSubscriptionPlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard/settings-BACKUP': {
       id: '/dashboard/settings-BACKUP'
       path: '/dashboard/settings-BACKUP'
@@ -337,6 +397,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard/organisations'
       fullPath: '/dashboard/organisations'
       preLoaderRoute: typeof DashboardOrganisationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/entxit-logs': {
+      id: '/dashboard/entxit-logs'
+      path: '/dashboard/entxit-logs'
+      fullPath: '/dashboard/entxit-logs'
+      preLoaderRoute: typeof DashboardEntxitLogsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard/audit-logs-BACKUP': {
@@ -374,8 +441,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardAlertsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/organisations/security-activities/$securityId': {
+      id: '/dashboard/organisations/security-activities/$securityId'
+      path: '/security-activities/$securityId'
+      fullPath: '/dashboard/organisations/security-activities/$securityId'
+      preLoaderRoute: typeof DashboardOrganisationsSecurityActivitiesSecurityIdRouteImport
+      parentRoute: typeof DashboardOrganisationsRoute
+    }
+    '/dashboard/organisations/host-visitors/$hostId': {
+      id: '/dashboard/organisations/host-visitors/$hostId'
+      path: '/host-visitors/$hostId'
+      fullPath: '/dashboard/organisations/host-visitors/$hostId'
+      preLoaderRoute: typeof DashboardOrganisationsHostVisitorsHostIdRouteImport
+      parentRoute: typeof DashboardOrganisationsRoute
+    }
   }
 }
+
+interface DashboardOrganisationsRouteChildren {
+  DashboardOrganisationsHostVisitorsHostIdRoute: typeof DashboardOrganisationsHostVisitorsHostIdRoute
+  DashboardOrganisationsSecurityActivitiesSecurityIdRoute: typeof DashboardOrganisationsSecurityActivitiesSecurityIdRoute
+}
+
+const DashboardOrganisationsRouteChildren: DashboardOrganisationsRouteChildren =
+  {
+    DashboardOrganisationsHostVisitorsHostIdRoute:
+      DashboardOrganisationsHostVisitorsHostIdRoute,
+    DashboardOrganisationsSecurityActivitiesSecurityIdRoute:
+      DashboardOrganisationsSecurityActivitiesSecurityIdRoute,
+  }
+
+const DashboardOrganisationsRouteWithChildren =
+  DashboardOrganisationsRoute._addFileChildren(
+    DashboardOrganisationsRouteChildren,
+  )
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -385,11 +484,13 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardAnnouncementsBACKUPRoute: DashboardAnnouncementsBACKUPRoute,
   DashboardAuditLogsRoute: DashboardAuditLogsRoute,
   DashboardAuditLogsBACKUPRoute: DashboardAuditLogsBACKUPRoute,
-  DashboardOrganisationsRoute: DashboardOrganisationsRoute,
+  DashboardEntxitLogsRoute: DashboardEntxitLogsRoute,
+  DashboardOrganisationsRoute: DashboardOrganisationsRouteWithChildren,
   DashboardReportsRoute: DashboardReportsRoute,
   DashboardReportsBACKUPRoute: DashboardReportsBACKUPRoute,
   DashboardSettingsRoute: DashboardSettingsRoute,
   DashboardSettingsBACKUPRoute: DashboardSettingsBACKUPRoute,
+  DashboardSubscriptionPlanRoute: DashboardSubscriptionPlanRoute,
   DashboardSubscriptionsRoute: DashboardSubscriptionsRoute,
   DashboardSupportRoute: DashboardSupportRoute,
   DashboardSupportBACKUPRoute: DashboardSupportBACKUPRoute,
